@@ -39,7 +39,7 @@ func (c httpClient) Get(URL string, params map[string]string, model interface{})
 	return parseResponse(b, model)
 }
 
-func newClient() *httpClient {
+func NewRatesClient() *httpClient {
 	client := &http.Client{
 		Timeout: time.Second * 10,
 	}

@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const baseURL = "https://ratesapi.io/api/"
+const baseURL = "https://api.ratesapi.io/api/"
 
 type httpClient struct {
 	client *http.Client
@@ -19,7 +19,9 @@ func (c httpClient) Get(URL string, params map[string]string, model interface{})
 	if err != nil {
 		return err
 	}
+
 	var q url.Values
+
 	if params != nil {
 		q = req.URL.Query()
 		for k, v := range params {
@@ -27,6 +29,7 @@ func (c httpClient) Get(URL string, params map[string]string, model interface{})
 		}
 		req.URL.RawQuery = q.Encode()
 	}
+
 	res, err := c.client.Do(req)
 	if err != nil {
 		return err
@@ -36,6 +39,7 @@ func (c httpClient) Get(URL string, params map[string]string, model interface{})
 	if err != nil {
 		return err
 	}
+
 	return parseResponse(b, model)
 }
 
@@ -43,6 +47,7 @@ func NewRatesClient() *httpClient {
 	client := &http.Client{
 		Timeout: time.Second * 10,
 	}
+
 	return &httpClient{
 		client: client,
 	}

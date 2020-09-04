@@ -6,7 +6,7 @@ const latestRoute = "latest"
 
 // Returns RatesResponse with specified base and destination currencies (symbols)
 func LatestByBaseAndSymbols(base string, symb ...string) (response RatesResponse, err error) {
-	c := newClient()
+	c := NewRatesClient()
 	symbols := strings.Join(symb, ",")
 	params := map[string]string{
 		"base":    base,
